@@ -1,0 +1,5 @@
+Datasource:
+  1.https://www.gapminder.org/data/             | format: xls/csv       | Swedish foundation that produces free teaching resources making the world understandable based on reliable statistics.
+  2.http://ec.europa.eu/eurostat/data/database  | format: xls/csv/tsv   | Statistical office of the European Union.
+  3.http://data.worldbank.org/                  | format: xls  | The World Bank is a vital source of financial and technical assistance to developing countries around the world
+  4.http://hdr.undp.org/en/composite/GDI        | format: xls  | United Nations Development Programme - Human Development Reports

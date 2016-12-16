@@ -1,0 +1,426 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "GEXP"
+  contact:
+    email: "hrisca.marius@gmail.com"
+  license:
+    name: "info.uaic.ro - open"
+# schemes:
+# - "http"
+
+consumes:
+- "application/json"
+produces:
+- "application/json"
+
+paths:
+  /category:
+    get:
+      tags:
+      - "categories"
+      summary: "Get all categories and subcategories"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Category"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        500:
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /country:
+    get:
+      tags:
+      - "countries"
+      summary: "Get all countries"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Country"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        500:
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/ApiResponse"       
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /search/{subcategoryId}/{countryIds}/{populationId}:
+    get:
+      tags:
+      - "data"
+      summary: "Get data after applying filters(category/country/population/dates)"
+      description: "Returns search result"
+      operationId: "getSearch"
+      parameters:
+      - name: "subcategoryId"
+        in: "path"
+        description: "Subcategory selected by the user."
+        required: true
+        type: "integer"
+      - name: "countryIds"
+        in: "path"
+        description: "Countries selected by user"
+        required: true
+        type: "array"
+        items:
+          type: "integer"
+      - name: "populationId"
+        in: "path"
+        description: "Male/Female/Both selected by the user."
+        required: true
+        type: "integer"
+      - name: "start_date"
+        in: "query"
+        required: false
+        description: "Start date selected by the user."
+        type: "string"
+      - name: "end_date"
+        in: "query"
+        required: false
+        description: "End date selected by the user"
+        type: "string"
+      responses:
+        200: 
+          description: "successful operation"
+          schema:
+            items:
+              $ref: "#/definitions/Data"
+        400: 
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        404: 
+          description: "Data not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        500: 
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /data/upload:
+    post:
+      security:
+        - internalApiKey: []
+      tags:
+      - "create data"
+      description: "Create new data for current year by uploading a file."
+      summary: "Creating new data for specific subcategory && country && year. If the subcategory does not exists, it is created"
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: file
+          in: formData
+          description: The uploaded file data
+          required: true
+          type: file
+      responses:
+        200: 
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        201: 
+          description: "Created"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        401: 
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        403: 
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400: 
+          description: "Bad request (invalid file)"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        500: 
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /data:
+    post:
+      security:
+        - internalApiKey: []
+      tags:
+      - "create data"
+      description: "Create new data for current year."
+      summary: "Creating new data for specific subcategory && country && year using a formular."
+      consumes:
+        - application/json
+      parameters:
+        - name: "data"
+          in: "body"
+          description: "JSON with information about subcategory/country/population and the actual value."
+          required: true
+          schema:
+            $ref: "#/definitions/DataBody"
+      responses:
+        200: 
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        201: 
+          description: "Created"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        401: 
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        403: 
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400: 
+          description: "Bad request (invalid body)"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        500: 
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    put:
+      security:
+        - internalApiKey: []
+      tags:
+      - "update value"
+      description: "Update data on a specific year & country & category."
+      consumes:
+        - application/json
+      parameters:
+        - name: "data"
+          in: "body"
+          description: "JSON with information about subcategory/country/population and the actual value."
+          required: true
+          schema: 
+            $ref: "#/definitions/DataBody"
+      responses:
+        200: 
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        201: 
+          description: "Created"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        401: 
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        403: 
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400: 
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        500: 
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    delete:
+      security:
+        - internalApiKey: []
+      tags:
+      - "delete value"
+      description: "Delete data."
+      summary: "Delete data for specific subcategory && country && year."
+      parameters:
+        - name: "data"
+          in: "body"
+          description: "JSON with information about subcategory/country/population and the actual value."
+          required: true
+          schema:
+            $ref: "#/definitions/DataBody"
+      responses:
+        200: 
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        401: 
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        403: 
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        400: 
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        500: 
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    
+        
+definitions:
+  Subcategory:
+    type: "object"
+    properties: 
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        format: "string"
+    xml: 
+      name: "Subcategory"
+  
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        format: "string"
+      subcategories:
+        $ref: "#/definitions/Subcategory"
+    xml:
+      name: "Category"
+  
+  Country:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        format: "string"
+    xml:
+      name: "Country"
+  
+  ChartData:
+    type: "object"
+    properties:
+      columns:
+        description: "For chart columns"
+        type: "array"
+        items:
+          $ref: "#/definitions/Country"
+      rows:
+        description: "For chart rows: [year, valueCountry1, valueCountry2, ..., valueCountryN]. The number N depends on the number of columns."
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "number"
+            
+  Data:
+    type: "object"
+    title: "Data"
+    properties:
+      subcategory:
+        $ref: "#/definitions/Subcategory"
+      data:
+        $ref: "#/definitions/ChartData"
+      recommandations:
+        $ref: "#/definitions/Recommandation"
+  
+  DataBody:
+    type: object
+    title: Body
+    properties:
+      subcategoryId:
+        type: integer
+        format: "int64"
+      countryId:
+        type: integer
+        format: "int64"
+      populationId:
+        type: integer
+        format: "int64"
+      value:
+        type: number
+        format: "double"
+        
+  Recommandation: 
+    type: "object"
+    properties:
+      byCategory:
+        description: "DBPedia URIs that describes additional info. For example: universities for Education. "
+       
+      otherSubcategory:
+        description: "Other subcategory, same country"
+        
+      otherCountries:
+        description: "Same subcategory, other countries"
+        
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        description: HTTP status code
+      message:
+        type: string
+        description: Message describing error
+        
+securityDefinitions:
+  internalApiKey:
+    type: apiKey
+    in: header
+    name: X-Mashape-Key
+    
+# basePath: /calincrist/Gexp/1.0.0
+schemes:
+ - https
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+# Added by API Auto Mocking Plugin
+basePath: /mihaigliga21/gexp/1.0.0
