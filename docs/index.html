@@ -1,0 +1,196 @@
+<html lang="en">
+	<head>
+		<title>GExp - Technical report</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+		<link rel="icon" type="image/png" href="images/favicon.png">
+		<link href='https://fonts.googleapis.com/css?family=Raleway:200, 400,800' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="col-md-offset-2 col-md-8">
+			<center><a href="#"><img alt="GExp logo" height="200" src="images/logo.png" class="logo"></a></center>
+			
+			<div class="chapter">
+				<h2 class="no-num no-toc" style="margin-bottom:25px" id="abstract"><b>Abstract</b></h2>
+				<p>
+					&nbsp; &nbsp; &nbsp; &nbsp;In the years since its creation in 1995, much debate has arisen surrounding the reliability, and usefulness of the Gender Development Index (GDI) in making adequate comparisons between different countries and in promoting gender-sensitive development. The GDI is particularly criticized for being often mistakenly interpreted as an independent measure of gender-gaps when it is not, in fact, intended to be interpreted in that way, because it can only be used in combination with the scores from the Human Development Index, but not on its own. Additionally, the data that is needed in order to calculate the GDI is not always readily available in many countries, making the measure very hard to calculate uniformly and internationally.
+
+				</p>
+			</div>
+			<div class="chapter">
+				<h2 style="margin-bottom:25px"><b>Table of Contents</b></h2>
+				<ul class="toc">
+					<li><a href="#introduction"><span class="secno">1 </span>Introduction</a></li>
+					<li><a href="#objectives"><span class="secno">2 </span>Objectives</a></li>
+					<li><a href="#architecture"><span class="secno">3 </span>Architecture</a></li>
+					<li><a href="#front-end"><span class="secno">4 </span>Front-end</a></li>
+					<li><a href="#technologies"><span class="secno">5 </span>Used Technologies</a></li>
+					<li><a href="#swagger-resource"><span class="secno">6 </span>API Specification</a></li>
+					<li><a href="#authors"><span class="secno">7 </span>Authors</a></li>
+					<li><a href="#references_bibliography"><span class="secno">8 </span>References and bibliography</a></li>
+				</ul>
+			</div>
+
+			
+			<div class="chapter">
+				<h2 id="introduction" style="margin-bottom:25px"><span class="secno" > </span><b>Introduction</b></h2>
+				<p>&nbsp; &nbsp; &nbsp; &nbsp;GExp is an interactive Web tool to explore, filter, visualize and update the information concerning the disparities between women and men in three basic dimensions of human development: health, knowledge and living standards. This web-application offers various queries of interest. An example: the map of European states offering at least 13 years of schooling for females versus males, plus info about the most important universities in these areas.</p>
+			</div>
+			<div class="chapter">
+				<h2 id="objectives" style="margin-bottom:25px"><span class="secno"> </span><b>Objectives</b></h2>
+				<div class="row">
+					<div class="col-md-4">
+						<p>
+							The main objective of the application is to transform one-star data (eg: xls, pdf, ...) into 5-star linked data(rdf, owl).
+							The converted data would be provided to users in an interactive way allowing to filter and browse through different categories, gender, countries and years.
+
+						</p>
+					</div>
+					<div >
+						
+						<a href="http://5stardata.info/en/" target="_blank"><img style="max-width:100%; max-height:100%; float:right;" alt="" height="250" src="images/5-star-steps.png" /></a> 	
+						
+					</div>
+					
+				</div>
+				<p>
+				
+				</p>
+			</div>	
+			<div class="chapter">
+				<h2 id="architecture" style="margin-bottom:25px"><span class="secno"> </span><b>Architecture</b></h2>
+
+				<div style="margin-bottom:60px" > 
+					<center><h4>Application architecture</h4></center>
+					<img style="max-width:100%; max-height:100%" src="images/Diagram1.png" />
+					
+				</div>
+
+				<div >
+					<center>
+						<h4>Main workflow</h4>	
+						<img style="max-width:100%; max-height:100%" height="430" src="images/Diagram2.png" />
+					</center>
+					
+				</div>	
+					
+			</div>		
+			<div class="chapter" >
+				<h2 id="front-end" style="margin-bottom:25px"><span class="secno"> </span><b>Front-end</b></h2>
+				<div style="margin-bottom:40px">
+					<center><img style="max-width:100%; max-height:100%" src="images/mockup2.png"></center>
+				</div>
+				<div>
+					<center>
+						<h4>Update GExp data store</h4>
+						<img style="max-width:100%; max-height:100%" src="images/mockup3.png">
+					</center>
+				</div>
+			</div>			
+
+			<div class="chapter">
+				<h2 id="technologies" style="margin-bottom:25px"><span class="secno"> </span><b>Used Techologies</b></h2>
+				<div class="row">
+					<div class="col-sm-3">
+						<h3>Front-end</h3>
+						<ul>
+							<li>AngularJS</li>
+							<li>HTML5</li>
+							<li>CSS3</li>
+							<li>Ajax</li>
+							<li>Javascript</li>
+							<li>RDFa</li>
+
+						</ul>
+					</div>
+					<div class="col-sm-3">
+						<h3>Back-end</h3>
+						<ul>
+							<li>.NET</li>
+							<li>Pyton</li>
+							<li>REST API</li>	
+							<li>SPARQL</li>					
+						</ul>
+					</div>
+					<div class="col-sm-3">
+						<h3>Data store</h3>
+						<ul>
+							<li>StarDog</li>
+							<li>RDF files</li>
+							<li>OWL files</li>
+						</ul>
+					</div>
+					<div class="col-sm-3">
+						<h3>Tools</h3>
+						<ul>
+							<li>Open refine</li>
+							<li>Any23</li>
+							<li>Protege</li>
+							
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="chapter">
+				<h2 id="swagger-resource" style="margin-bottom:25px"><span class="secno"> </span><b>API Specification</b></h2>
+				<p>
+					<center><a href="https://app.swaggerhub.com/api/mihaigliga21/gexp/1.0.0" target="_blank">SWAGGER</a></center>
+					<img style="max-width:100%; max-height:100%" src="images/api.JPG">
+				</p>
+			</div>	
+
+
+			<div class="chapter">
+				<h2 id="resources" style="margin-bottom:25px"><span class="secno"> </span><b>Resources</b></h2>
+				<p>
+					We use resources from the following websites:
+
+					<ul>
+						<li><a href="https://www.gapminder.org/data/" target="_blank">Gapminder World</a> for different statistical information regarding the world,</li>
+						<li><a href="http://ec.europa.eu/eurostat/data/database" target="_blank">Eurostat</a> for the European countries,</li>
+						<li><a href="http://blog.sourced.tech/post/100-awesome-women-in-the-open-source-community-you-should-know/" target="_blank">Awesome Women In The Open-Source Community</a> for the Computer Science domain,</li>
+						<li><a href="http://www.europeansocialsurvey.org/data/" target="_blank">European Social Survey</a> for insights concerning the European citizens.</li>
+						<li><a href="http://wiki.dbpedia.org/" target="_blank">DBpedia</a></li>
+						<li><a href="https://www.wikidata.org/wiki/Wikidata:Main_Page" target="_blank">Wikidata</a></li>
+						
+					</ul>
+				</p>
+			</div>	
+				<div class="chapter"><h2 id="authors" style="margin-bottom:25px"><span class="secno"> </span><b>Authors</b></h2>
+						<ul>
+							<li>Ciubotariu C. Calin Cristian - MLC</li>
+							<li>Gliga N. Mihail - MLC</li>
+							<li>Hrisca C. Marius Valentin - MLC</li>
+						</ul>
+				
+					
+				</div>
+
+				<div class="chapter"><h2 id="references_bibliography" style="margin-bottom:25px"><span class="secno"> </span><b>  
+
+					References and bibliography</b></h2>
+					<p>
+						<ul>
+							<li><a href="http://profs.info.uaic.ro/~busaco/teach/courses/wade/" target="_blank">http://profs.info.uaic.ro/~busaco/teach/courses/wade/</a></li>
+							<li><a href="https://www.wikidata.org/wiki/Wikidata:Main_Page" target="_blank">https://www.wikidata.org/wiki/Wikidata:Main_Page</a></li>	
+							<li><a href="http://wiki.dbpedia.org/" target="_blank">http://wiki.dbpedia.org/</a></li>
+							<li><a href="https://www.gapminder.org/data/" target="_blank">https://www.gapminder.org/data/</a></li>
+							<li><a href="https://schema.org/docs/schemas.html" target="_blank">https://schema.org/docs/schemas.html</a></li>
+							<li><a href="http://ec.europa.eu/eurostat/data/database" target="_blank">http://ec.europa.eu/eurostat/data/database</a></li>
+							<li><a href="http://www.europeansocialsurvey.org/data/" target="_blank">http://www.europeansocialsurvey.org/data/</a></li>
+							<li><a href="http://blog.sourced.tech/post/100-awesome-women-in-the-open-source-community-you-should-know/" target="_blank">http://blog.sourced.tech/post/100-awesome-women-in-the-open-source-community-you-should-know/</a></li>
+						</ul>
+
+					</p>
+					
+				</div>
+			</div>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/animations.js"></script>
+	</body>
+</html>

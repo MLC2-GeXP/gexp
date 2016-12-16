@@ -1,0 +1,48 @@
+	<div class="chapter">
+					<h2 id="apis"><span class="secno"><b>5</b> </span>APIs</h2>
+					<p>The application makes use of a wide range of APIs available on the web to retrieve data such as as user's interests (facebook), funny videos (youtube), and ontology (dbpedia). Also, the entire application is built around the SPARQL language and protocol.
+					</div>
+					<div class="sub-chapter">
+						<h3 id="dbpedia"><span class="secno"><b>5.1</b> </span>DBPedia</h3>
+						<p><b>DBpedia</b> is a crowd-sourced community effort to extract structured information from Wikipedia and make this information available on the Web. DBpedia allows you to ask sophisticated queries against Wikipedia, and to link the different data sets on the Web to Wikipedia data. We hope that this work will make it easier for the huge amount of information in Wikipedia to be used in some new interesting ways. Furthermore, it might inspire new mechanisms for navigating, linking, and improving the encyclopedia itself. External usage of DBPedia will be made through SPQARL.</p>
+					</div>
+					<div class="sub-chapter">
+						<h3 id="sparql"><span class="secno"><b>5.2</b> </span>SPARQL</h3>
+						<div class="sub-chapter">
+							<h3><b>5.2.1</b> What is SPARQL?</h3>
+							<p><b>SPARQL</b> is a query language designed specifically to query RDF databases. SPARQL queries are sent from a client to a service known as a SPARQL endpoint using the HTTP protocol.  The interaction between the client and the endpoint is defined in a machine-friendly protocol that is not intended to be interpreted by humans, so use of SPARQL requires an interface that allows the user to enter the queries and to display the results in a meaningful way.  As with traditional database languages such as SQL, those interfaces are commonly constructed so that the queries are constructed and launched  through forms that do not require the human user to have any knowledge of RDF and SPARQL.  Programming such interfaces is beyond the scope of this guide. </p><p>In this guide, some examples will be provided to show you some of the capabilities of SPARQL.  Then a few basic search terms will be described and illustrated.  SPARQL is capable of doing queries that are far more sophisticated than those shown here.
+						</div>
+						<div class="sub-chapter">
+							<h3><b>5.2.2</b> Creating RDF metadata and URIs via DBpedia</h3>
+							</h4><p>DBpedia transforms Wikipedia pages into RDF data. Creating a page in Wikipedia creates RDF in DBpedia.  Creating a page for a taxonomist creates a URI and other metadata about the person. For example, the page </p><p><a href="http://en.wikipedia.org/wiki/Johan_Christian_Fabricius" rel="nofollow">http://en.wikipedia.org/wiki/Johan_Christian_Fabricius</a> </p><p>describes Fabricus.  DBpedia creates a URI of the format </p><pre class="prettyprint">http://dbpedia.org/resource/wikipedia_page_name</pre><p>where wikipedia_page_name is the name of the regular Wikipedia html page.  Note that underscore characters replace spaces, the strategy used for creating the regular page URLs.  In the case of Fabricus, his URI is: </p><pre class="prettyprint">http://dbpedia.org/resource/Johan_Christian_Fabricius</pre>
+							<h3><b>5.2.3</b> Querying DBpedia</h3><p>DBpedia can be queried via a Web interface at <a href="http://dbpedia.org/sparql" rel="nofollow">http://dbpedia.org/sparql</a> .  The interface uses the <a href="http://virtuoso.openlinksw.com/" rel="nofollow">Virtuoso</a> SPARQL Query Editor to query the DBpedia endpoint.  e.g. the query</p>
+							<pre class="prettyprint">
+PREFIX dbpedia-owl: &lt;http://dbpedia.org/ontology/&gt;
+PREFIX dbpprop: &lt;http://dbpedia.org/property/&gt;
+PREFIX dbres: &lt;http://dbpedia.org/resource/&gt;
+SELECT ?y WHERE {
+?y dbpedia-owl:binomialAuthority dbres:Johan_Christian_Fabricius.
+}
+limit 10</pre>
+							<p>should provide a table of 10 species for which the binomial authority was Fabricus.  Note that because the resources are described by the Wikipedia page names, there is no consistency in the URIs - some are given as scientific names and some are given as common names.  Output formats other than HTML are possible with this query editor but most aren&#x27;t human-friendly.   </p><p>DBpedia has an ontology for categorizing information systematically.  It includes properties such as dbpedia-owl:family and other taxonomic levels.  e.g. the query </p>
+							<pre class="prettyprint">
+PREFIX dbpedia-owl: &lt;http://dbpedia.org/ontology/&gt;
+PREFIX dbpprop: &lt;http://dbpedia.org/property/&gt;
+PREFIX dbres: &lt;http://dbpedia.org/resource/&gt;
+DESCRIBE ?x WHERE {
+?x dbpedia-owl:family dbres:Crambidae.
+?x dbpedia-owl:binomialAuthority dbres:Johan_Christian_Fabricius.
+}
+limit 10</pre>
+							<p>shows all of the triples that describe the 5 or so Crambidae species described by Fabricus which have articles in Wikipedia.  You should note that DBpedia routinely provides the language attribute for literals.  So a query containing a literal must have an &quot;@&quot; language tag.  For example: </p>
+							<pre class="prettyprint">
+PREFIX dbpprop: &lt;http://dbpedia.org/property/&gt;
+DESCRIBE ?x WHERE {
+?x dbpprop:binomial &quot;Diatraea saccharalis&quot;@en.
+}</pre>
+							<p>will produce results even though the binomial is in Latin because Wikipedia apparently assumes that text entered in English wiki pages is in English. </p>
+						</div>
+					</div>
+					<div class="sub-chapter">
+						</p>
+					</div>
