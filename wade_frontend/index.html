@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+
+<!--< lang="en">-->
+    <base href="/">
+    <title>GDI Smart Explorer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="app/app.component.css" rel="stylesheet" />
+    <link href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/bootstrap-material-design/dist/js/material.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <!-- Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+      $.material.init()
+    </script>
+</head>
+
+<body>
+    <gexp-app>
+        Loading App...
+    </gexp-app>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+#radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}
+
+.countries-list {
+    max-height: 450px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.submit-button {
+    margin-left: 14%;
+    margin-top: 20px;
+    margin-bottom: -20px;
+}

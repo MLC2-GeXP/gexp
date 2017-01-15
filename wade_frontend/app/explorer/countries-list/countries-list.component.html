@@ -1,0 +1,10 @@
+<div class="well col-sm-2 col-sm-offset-1">
+    <div class="countries-list">
+        <label *ngFor='let country of countries'>
+            <input type="checkbox" value="{{country.countryId}}">
+            <span class="checkbox-material"><span class="check"></span></span>
+            {{country.name + ' ' + country.countryId   }}
+        </label>
+    </div>
+    <p><button (click)="applyFilter()" class="btn btn-primary btn-lg submit-button">Apply</button></p>
+</div>
