@@ -1,4 +1,6 @@
 import {Component, OnInit} from "@angular/core";
+import {Message} from "primeng/components/common/api";
+import {DataService} from "../data-form/data-form.service";
 /**
  * Created by calin.crist on 15/01/2017.
  */
@@ -9,71 +11,61 @@ import {Component, OnInit} from "@angular/core";
     templateUrl: 'line-chart.component.html'
 })
 
-export class LineChartComponent {
+export class LineChartComponent implements OnInit {
 
-  lineChartOptions: any = {
-    chartType: 'LineChart',
-    dataTable: {
-      cols: [
+  data: any;
+
+  msgs: Message[];
+
+  constructor(private _dataService: DataService) { }
+
+  ngOnInit(): void {
+    // this._dataService.
+
+    this.data = {
+      labels: ['1960', '1970', '1980', '1990', '2000', '2010', '2020','1960', '1970', '1980', '1990', '2000', '2010', '2020'],
+      datasets: [
         {
-          'type' : 'number',
-          'label': 'No. of people'
+          label: 'First Dataset',
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: '#4bc0c0'
         },
         {
-          'type' : 'number',
-          'label': 'Germany'
+          label: 'Second Dataset',
+          data: [28, 48, 40, 19, 86, 27, 90],
+          fill: false,
+          borderColor: '#565656'
         },
         {
-          'type' : 'number',
-          'label': 'USA'
+          label: 'Second Dataset',
+          data: [28, 48, 40, 19, 86, 27, 90],
+          fill: false,
+          borderColor: '#565656'
         },
         {
-          'type' : 'number',
-          'label': 'Brazil'
-        }
-      ],
-      rows: [
-        {
-          'c': [
-            {'v': 1},
-            {'v': 37.8},
-            {'v': 80.8},
-            {'v': 41.8}
-          ]
+          label: 'Second Dataset',
+          data: [28, 48, 40, 19, 86, 27, 90],
+          fill: false,
+          borderColor: '#515151'
         },
         {
-          'c': [
-            {'v': 2},
-            {'v': 30.9},
-            {'v': 69.5},
-            {'v': 32.4}
-          ]
+          label: 'Second Dataset',
+          data: [28, 18, 10, 19, 16, 27, 90],
+          fill: false,
+          borderColor: '#265459'
         },
         {
-          'c': [
-            {'v': 3},
-            {'v': 25.4},
-            {'v': 57},
-            {'v': 25.7}
-          ]
-        },
-        {
-          'c': [
-            {'v': 4},
-            {'v': 11.7},
-            {'v': 18.8},
-            {'v': 10.5}
-          ]
+          label: 'Second Dataset',
+          data: [8, 38, 42, 29, 26, 27, 90],
+          fill: false,
+          borderColor: '#115151'
         }
       ]
-    },
-    options: {
-      title: 'No. of people',
-      subtitle: 'subcategory (in billions)',
-      width: '850',
-      height: '500',
-      intervals: { 'lineWidth':2, 'barWidth': 0.5 },
-      bars: 'vertical'
-    },
+    }
+  }
+  selectData(event) {
+    this.msgs = [];
+    this.msgs.push({severity: 'info', summary: 'Data Selected', 'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index]});
   }
 }
