@@ -25,13 +25,14 @@ export class DataService {
 
   getData(input: any): Observable<IResult> {
 
+    const categoryId: string = input['categoryId']; // number
     const subcategoryId: string = input['subcategoryId']; // number
-    const populationId: string = input['populationId']; // number
+    const indicatorId: string = input['indicatorId']; // number
     const countryIds: any[] = input['countryIds']; // array
     const fromYear: string = input['fromYear'];
     const toYear: string = input['toYear'];
 
-    var finalUrl = `${this._getDataUrl}/${subcategoryId}/${populationId}/`;
+    var finalUrl = `${this._getDataUrl}/${categoryId}/${subcategoryId}/${indicatorId}/`;
 
     if (countryIds) {
       finalUrl += `?countryIds=[${countryIds.toString()}]`;
@@ -39,8 +40,6 @@ export class DataService {
     if (fromYear && toYear) {
       finalUrl += `&time=${fromYear}-${toYear}`;
     }
-
-    alert('URL: ' + finalUrl);
 
     return this._http.get(finalUrl)
       .map((response: Response) => <IResult> response.json())

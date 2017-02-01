@@ -3,12 +3,11 @@ import '../../node_modules/chart.js/src/chart.js'
 import '../../node_modules/jquery/dist/jquery.js';
 import {DataService} from "./data-form/data-form.service";
 import {FormBuilder} from "@angular/forms";
-import {IData, IPopulation, ICategory, ISubcategory, ICountry} from "./data-form/data";
+import {IData, IPopulation, ICategory, ISubcategory, ICountry, IResult} from "./data-form/data";
 /**
  * Created by calin.crist on 15/01/2017.
  */
 
-const url = './explorer/loadCharts.js';
 declare var jQuery: any;
 
 @Component({
@@ -22,6 +21,7 @@ export class ExplorerComponent implements OnInit{
   
     initialData: IData[];
     countries: ICountry[];
+    chartData: IResult;
 
     constructor(private _dataService: DataService) {  }
 
@@ -41,11 +41,12 @@ export class ExplorerComponent implements OnInit{
     }
     
     onSubmit(parameters: any): void {
-      console.log(parameters);
-  
-      // //  'Search' request to web service.
+      //  'Search' request to web service.
       this._dataService.getData(parameters).
-      subscribe(response => console.log(response),
+      subscribe(response => {
+        this.chartData = response
+        console.log(this.chartData);
+      },
         error => console.log(error));
     }
 }

@@ -10,10 +10,10 @@
           <!--Charts with tabs-->
           <p-tabView class="">
             <p-tabPanel header="Line chart">
-              <gexp-line-chart></gexp-line-chart>
+              <gexp-line-chart *ngIf="chartData" [data]="chartData.lineChartData" ></gexp-line-chart>
             </p-tabPanel>
             <p-tabPanel header="Geo chart">
-              <gexp-geo-chart></gexp-geo-chart>
+              <gexp-geo-chart *ngIf="chartData" [data]="chartData.lineChartData"></gexp-geo-chart>
             </p-tabPanel>
           </p-tabView>
     </p-panel>

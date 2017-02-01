@@ -1,1 +1,1 @@
-<p-chart type="line" [data]="data" (onDataSelect)="selectData($event)"></p-chart>
+<p-chart type="line" *ngIf="chartData" [data]="chartData" (onDataSelect)="selectData($event)"></p-chart>

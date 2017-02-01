@@ -7,9 +7,15 @@ export interface ICountry {
   name: string;
 }
 
+export interface IIndicator {
+  id: number;
+  name: string;
+}
+
 export interface ISubcategory {
   id: number;
   name: string;
+  indicators: IIndicator[];
 }
 
 export interface ICategory {
@@ -32,5 +38,5 @@ export interface IData {
 export interface IResult {
   lineChartData: any;
   geoChartData: any;
-  recommendation: any;
+  recommendation: any[];
 }

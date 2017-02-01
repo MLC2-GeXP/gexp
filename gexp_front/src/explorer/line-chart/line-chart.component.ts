@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef} from "@angular/core";
 import {Message} from "primeng/components/common/api";
 import {DataService} from "../data-form/data-form.service";
 /**
@@ -11,59 +11,56 @@ import {DataService} from "../data-form/data-form.service";
     templateUrl: 'line-chart.component.html'
 })
 
-export class LineChartComponent implements OnInit {
-
-  data: any;
+export class LineChartComponent implements OnChanges {
 
   msgs: Message[];
 
-  constructor(private _dataService: DataService) { }
+  @Input() chartData: any;
 
-  ngOnInit(): void {
-    // this._dataService.
+  @Input() set data(newData: any) {
+    this.chartData = {
+      labels: [],
+      datasets: []
+    }
 
-    this.data = {
-      labels: ['1960', '1970', '1980', '1990', '2000', '2010', '2020','1960', '1970', '1980', '1990', '2000', '2010', '2020'],
-      datasets: [
-        {
-          label: 'First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: '#4bc0c0'
-        },
-        {
-          label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
-          fill: false,
-          borderColor: '#565656'
-        },
-        {
-          label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
-          fill: false,
-          borderColor: '#565656'
-        },
-        {
-          label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
-          fill: false,
-          borderColor: '#515151'
-        },
-        {
-          label: 'Second Dataset',
-          data: [28, 18, 10, 19, 16, 27, 90],
-          fill: false,
-          borderColor: '#265459'
-        },
-        {
-          label: 'Second Dataset',
-          data: [8, 38, 42, 29, 26, 27, 90],
-          fill: false,
-          borderColor: '#115151'
-        }
-      ]
+    if (newData == null) {
+      return;
+    }
+
+    this.chartData.labels = newData['years'];
+    for (let set of newData['datasets']) {
+      let obj = {
+        label: set.country_name,
+        data: set.data,
+        borderColor: this.randomColor(2),
+        fill: false
+      };
+      this.chartData.datasets.push(obj);
     }
   }
+
+  constructor(private ref: ChangeDetectorRef) {
+    ref.detach();
+    setInterval(() => {
+      this.ref.detectChanges();
+    }, 5000);
+    
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // this.data = changes['data']
+  }
+
+  randomColor(brightness: any){
+    function randomChannel(brightness){
+      var r = 255-brightness;
+      var n = 0|((Math.random() * r) + brightness);
+      var s = n.toString(16);
+      return (s.length==1) ? '0'+s : s;
+    }
+    return '#' + randomChannel(brightness) + randomChannel(brightness) + randomChannel(brightness);
+  }
+  
   selectData(event) {
     this.msgs = [];
     this.msgs.push({severity: 'info', summary: 'Data Selected', 'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index]});

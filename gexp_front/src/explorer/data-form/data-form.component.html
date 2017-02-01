@@ -12,14 +12,20 @@
       </div>
       <div class="ui-grid-row" style="margin: 10px 0px">
         <div class="ui-grid-col-12">
-          <p-dropdown [options]="subcategs" formControlName="subcategs" [autoWidth]="false"></p-dropdown>
+          <p-dropdown [options]="subcategs" formControlName="subcategs" [autoWidth]="false" #s
+                      (onChange)="subcategoryChanged(s.value.id)"></p-dropdown>
         </div>
       </div>
       <div class="ui-grid-row" style="margin: 10px 0px">
         <div class="ui-grid-col-12">
-          <p-dropdown [options]="genders" formControlName="genders" [autoWidth]="false"></p-dropdown>
+          <p-dropdown [options]="indi" formControlName="indi" [autoWidth]="false"></p-dropdown>
         </div>
       </div>
+      <!--<div class="ui-grid-row" style="margin: 10px 0px">
+        <div class="ui-grid-col-12">
+          <p-dropdown [options]="genders" formControlName="genders" [autoWidth]="false"></p-dropdown>
+        </div>
+      </div>-->
       <div class="ui-grid-row" style="margin: 10px 0px">
         <div class="ui-grid-col-12">
           <input type="text" pInputText formControlName="fromYear" style="width: 100%;"/>
